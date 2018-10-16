@@ -57,7 +57,7 @@
                 android:layout_gravity="center"
                 android:padding="15dp"
                 android:layout_margin="5dp"
-                android:text="Son Konumlarım"
+                android:text="Last Locations"
                 android:textColor="@color/loginblue"
                 android:textSize="18dp"
                 android:background="@color/colorWhite"/>
@@ -68,7 +68,7 @@
                 android:layout_gravity="center"
                 android:padding="15dp"
                 android:layout_margin="5dp"
-                android:text="Son Fotoğraflarım"
+                android:text="My İmages"
                 android:textColor="@color/loginblue"
                 android:textSize="18dp"
                 android:background="@color/colorWhite"/>

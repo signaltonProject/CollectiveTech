@@ -5,8 +5,8 @@
     <string name="addGpsData">Add Location Data</string>
     <string name="forget_password">Forget Password?</string>
     <string name="sing_up">Sing Up</string>
-    <string name="setting">Ayarlar</string>
-    <string name="quit">Çıkış</string>
+    <string name="setting">Settings</string>
+    <string name="quit">Exit</string>
     <string name="title_activity_maps">Map</string>
     <string name="description_text_one">Share Your Data</string>
     <string name="description_text_two">See Friend\'s</string>

@@ -41,12 +41,10 @@ public class CustomAdapter extends BaseAdapter {
 
         lineView=inflater.inflate(R.layout.dinamic_data,null);
         TextView userName=lineView.findViewById(R.id.userName);
-        TextView countImage=lineView.findViewById(R.id.ImageCount);
         TextView countGps=lineView.findViewById(R.id.GpsCount);
 
         User user=userList.get(i);
         userName.setText(user.getUserName().toString());
-        countImage.setText(String.valueOf(user.getCountOfImage()));
         countGps.setText(String.valueOf(user.getCountOfGps()));
 
         return lineView;

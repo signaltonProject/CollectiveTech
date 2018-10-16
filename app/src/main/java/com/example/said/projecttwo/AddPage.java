@@ -36,15 +36,15 @@ public class AddPage extends AppCompatActivity implements LocationListener {
     static final long min_time_change_for_update = 1000 * 6; //6000 milisaniyede bir location güncellemesi
     double latitude=0, longitude=0;
     String res;
-
+    String userName;
     JSONObject jObj = new JSONObject();
-    HttpConnection connect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_page);
-        final String reqUrl=getResources().getString(R.string.server_url)+"/add";  //veri göndereceğimiz sunucu adresi
+        final String reqUrl=getResources().getString(R.string.server_url);  //veri göndereceğimiz sunucu adresi
+        userName=getIntent().getStringExtra("user_name");
 
         btnAddGpsData = (Button) findViewById(R.id.btnAddGpsData);
         btnAddImage = (Button) findViewById(R.id.btnAddImage);
@@ -61,6 +61,7 @@ public class AddPage extends AppCompatActivity implements LocationListener {
             @Override
             public void onClick(View view) {
                 Intent goHome=new Intent(AddPage.this,Anasayfa.class);
+                goHome.putExtra("user_name",userName);
                 startActivity(goHome);
             }
         });
@@ -68,6 +69,7 @@ public class AddPage extends AppCompatActivity implements LocationListener {
             @Override
             public void onClick(View view) {
                 Intent goSearch=new Intent(AddPage.this,SearchPage.class);
+                goSearch.putExtra("user_name",userName);
                 startActivity(goSearch);
             }
         });
@@ -75,6 +77,7 @@ public class AddPage extends AppCompatActivity implements LocationListener {
             @Override
             public void onClick(View view) {
                 Intent goProfilPage=new Intent(AddPage.this,Profil.class);
+                goProfilPage.putExtra("user_name",userName);
                 startActivity(goProfilPage);
             }
         });
@@ -100,11 +103,9 @@ public class AddPage extends AppCompatActivity implements LocationListener {
                         if(location != null){
                             latitude=location.getLatitude();
                             longitude=location.getLongitude();
-                        }else{
-                            Toast.makeText(AddPage.this, "Konum Görüntülenemiyor...", Toast.LENGTH_SHORT).show();
                         }
                     }else{
-                        Toast.makeText(AddPage.this, "internet veya konum servisi aktif değil...", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddPage.this, "network or gps service not active", Toast.LENGTH_SHORT).show();
                     }
                 }catch (Exception e){
                     e.printStackTrace();
@@ -129,7 +130,7 @@ public class AddPage extends AppCompatActivity implements LocationListener {
             public void onClick(View view) {
                 try {
                     //sunucuya gönderilecek verinin json objesine dönüştürülmesi
-                    jObj.put("user_id",5);
+                    jObj.put("user_name",userName);
                     jObj.put("latitude",latitude);
                     jObj.put("longitude",longitude);
                 } catch (JSONException e) {
@@ -137,8 +138,8 @@ public class AddPage extends AppCompatActivity implements LocationListener {
                 }
 
                 //http bağlantısı ve gönderme işlemi
-                /*new postData(jObj).execute("http://192.168.1.102:3002/insert");
-                Toast.makeText(AddPage.this, res, Toast.LENGTH_SHORT).show();*/
+                new postData(jObj).execute(reqUrl+"/insert");
+                Toast.makeText(AddPage.this, res, Toast.LENGTH_SHORT).show();
             }
         });
 
